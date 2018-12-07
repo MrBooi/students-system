@@ -11,6 +11,6 @@ public interface StudentDao {
 	
 	List<Student>loadAllStudents();
 	
-	String findNameByID(long id);
+	String findNameByID(int id);
 
 }

@@ -77,8 +77,8 @@ public class StudentDaoImpl extends JdbcDaoSupport implements StudentDao {
 	}
 
 	@Override
-	public String findNameByID(long id) {
-		  String sql = "SELECT name FROM customer WHERE id = ?";
+	public String findNameByID(int id) {
+		  String sql = "SELECT name FROM students WHERE id= ?";
 		     return getJdbcTemplate().queryForObject(sql, new Object[]{id}, String.class);
 
 	}

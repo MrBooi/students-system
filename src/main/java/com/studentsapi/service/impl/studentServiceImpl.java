@@ -35,9 +35,10 @@ public class studentServiceImpl implements StudentService{
 	}
 
 	@Override
-	public void getStudentById(int id) {
+	public String getStudentById(int id) {
 		String name = StudentDao.findNameByID(id);
 		System.out.println("Student's name = " + name);
+		return name.toString();
 		
 	}
 

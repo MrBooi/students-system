@@ -8,5 +8,5 @@ public interface StudentService {
 	void insert(Student stud);
 	void insertBatch(List<Student> students);
 	void loadAllStudents();
-	void getStudentById(int stud);
+	String getStudentById(int stud);
 }
