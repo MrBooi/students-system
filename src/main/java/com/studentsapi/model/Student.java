@@ -6,19 +6,51 @@ public class Student implements Serializable  {
 	
 	private static final long serialVersionUID =1L;
 
-	private long id ;
+	private int id ;
 	private String name;
+	private String surname;
+	private int age;
 	private String email;
+	private int score;
 	
-	public Student() {
-	
-	}
-	
-	public Student(String name, String email) {
+	public Student () {
 		
-		this.name = name;
-		this.email = email;
 	}
+	
+	
+	public Student(String name, String surname, int age, String email,int score) {
+		super();
+	
+		this.name = name;
+		this.surname = surname;
+		this.age = age;
+		this.email = email;
+		this.score = score;
+	}
+
+	
+
+	
+
+	public String getSurname() {
+		return surname;
+	}
+
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+
+	public int getAge() {
+		return age;
+	}
+
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
 
 	public long getId() {
 		return id;
@@ -28,7 +60,7 @@ public class Student implements Serializable  {
 		return name;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -39,16 +71,23 @@ public class Student implements Serializable  {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
 
 	public String getEmail() {
 		return email;
 	}
 
-    @Override
-	public String toString() {
-	return"Student [id= "+ id +", name="+ name +" ,email="+email
-			+"]";
+
+	public int getScore() {
+		return score;
 	}
+
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+   
 	
 
 

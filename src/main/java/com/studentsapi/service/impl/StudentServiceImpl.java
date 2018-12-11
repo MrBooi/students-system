@@ -9,7 +9,7 @@ import com.studentsapi.dao.StudentDao;
 import com.studentsapi.model.Student;
 import com.studentsapi.service.StudentService;
 @Service
-public class studentServiceImpl implements StudentService{
+public class StudentServiceImpl implements StudentService{
      
 	@Autowired StudentDao StudentDao;
 	
@@ -26,20 +26,41 @@ public class studentServiceImpl implements StudentService{
 	}
 
 	@Override
-	public void loadAllStudents() {
+	public Object loadAllStudents() {
 		List<Student> listStudents = StudentDao.loadAllStudents();
 		for(Student stud: listStudents){
-			System.out.println(stud.toString());
+			System.out.println(stud);
 		}
+		return  listStudents;
+	}
+
+
+	@Override
+	public Student getStudentByName(String name) {
+		Student found = StudentDao.findByName(name);
+		return found;
+	}
+
+	@Override
+	public boolean isNameExists(String name) {
+	 return StudentDao.isNameExists(name);
+	 
+	}
+
+	@Override
+	public boolean deleteStudentById(int id) {
+	return StudentDao.deleteStudent(id);
+	 
+	}
+
+	@Override
+	public void editProfile(Student student) {
+		StudentDao.editStudent(student);
 		
 	}
 
 	@Override
-	public String getStudentById(int id) {
-		String name = StudentDao.findNameByID(id);
-		System.out.println("Student's name = " + name);
-		return name.toString();
-		
+	public Student getstudentProfile(int studentId) {
+		return StudentDao.findbyStudentId(studentId);
 	}
-
 }

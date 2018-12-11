@@ -1,2 +1,138 @@
-<h1>Yo!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CompuScan-Student-System</title> 
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body> 
 
+   <div id="app">
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+          <div class="container">
+            <a href="" class="navbar-brand">CompuScan-Student-System</a>
+          </div>
+        </nav>
+              <!-- button section -->
+      <section id="action" class="py-4 mb-4 bg-light">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3 mr-auto">
+                <a href="#" class="btn btn-secondary btn-block" v-on:click='averageScore'>
+                  <i class=""></i>Avarage Score
+                </a>
+              </div>
+  
+              <div class="col-md-3">
+                  <a href="#"  class="btn btn-primary btn-block" data-toggle="modal" data-target="#AddStudentModal">
+                    <i class="fa fa-user"></i> Add student
+                  </a>
+                </div>
+  
+              <div class="col-md-3">
+                <a href="#" class="btn btn-success btn-block" data-toggle="modal" data-target="#ScoreModal">
+                  <i class=""></i> Capture Score
+                </a>
+              </div>
+             
+            </div>
+          </div>
+        </section>
+
+        <!-- components display section -->
+         
+        <avg-score v-if='showAvgScore'></avg-Score>
+        <student-list  v-if='showDashboard' v-on:clicked-on="clickedOnStudent" ref="editStudent" ></student-list>
+        <edit-student v-if='ShowEditProfile' ref="editStudent" v-bind:student-id="studentId"  ></edit-student>
+
+        <!-- AddStudentModal -->
+        <div class="modal fade" id="AddStudentModal">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header bg-light ">
+                  <h5 class="modal-title">Add New Student </h5> 
+                   
+                  <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="name">Name</label>
+                      <input type="text" v-model="student.name" class="form-control" value="Ayabonga">
+                    </div>
+                    <div class="form-group">
+                        <label for="Surname">Surname</label>
+                        <input type="text" v-model="student.surname"  class="form-control" value="Booi">
+                      </div>
+                      <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="text" v-model="student.age"  class="form-control" value="15">
+                      </div>
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="text" v-model="student.email" class="form-control" value="test@test.com">
+                    </div>
+                  </form>
+                     <div>
+                      <p>{{msg}}</p>
+                     </div>
+                </div>
+                <div class="modal-footer">
+               
+                  <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button class="btn btn-primary"  v-on:click="addStudent()" >Add Student</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+       <!-- Add new ScoreModal -->
+      <div class="modal fade" id="ScoreModal">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+              <h5 class="modal-title">Add Student Score</h5>
+              <button class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" v-model="student.name"  class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="name">Student Score</label>
+                  <input type="number" v-model="student.score"  class="form-control">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button class="btn btn-primary" v-on:click="capture_Score()" >Add Student Score</button>
+            </div>
+          </div>
+        </div>
+      </div>
+   </div>
+
+
+
+
+     
+   <!-- import components -->
+     
+  <script src="/components/avgScoreComponent.js"></script> 
+  <script src="/components/tableComponent.js"></script>
+  <script src="/components/editProfileComponent.js"></script>
+  <script src="/components/main.js"></script>
+
+   <!-- import  -->
+  <script src="./js/jquery.min.js"></script>
+  <script src="./js/popper.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+</body>
+</html>
