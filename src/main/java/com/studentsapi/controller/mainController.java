@@ -140,6 +140,11 @@ return new CallStatus(false,"opps we dont have that student");
  }
  
  
+ @GetMapping("/Student/lastest/Score/id/{id}")
+ public CallStatus  viewScore(@PathVariable("id") int student_id) {
+ return new CallStatus(true,"found", studentScoreRepo.studentScore(student_id));
+ }
+ 
 
  @PostMapping("/add/student/id/{student_id}/score/{score}") 
  public @ResponseBody CallStatus addstudentScore (

@@ -4,7 +4,8 @@ import java.util.List;
 
 import com.studentsapi.model.Student;
 
-public interface StudentDao { 
+public interface StudentDao  { 
+	
 	void insert(Student student);
 	
 	void editStudent (Student student);

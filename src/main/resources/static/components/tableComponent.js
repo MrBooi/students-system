@@ -39,7 +39,6 @@ var StudentList = Vue.component('student-list',{
                   <th>#</th>
                   <th>Name</th>
                   <th>Surname</th>
-                  <th>Score</th>
                   <th></th>
                 </tr>
               </thead>
@@ -48,9 +47,8 @@ var StudentList = Vue.component('student-list',{
                   <td scope="row">*</td>
                   <td>{{student.name}}</td>
                   <td>{{student.surname}}</td>
-                  <td>{{student.score}}</td>
                   <td><button class="btn btn-secondary" v-on:click='editProfile(student.id)'>
-                    <i class="fa fa-angle-double-right"></i> edit
+                    <i class="fa fa-angle-double-right"></i> Edit/View score
                   </button></td>
                 </tr>
               </tbody>

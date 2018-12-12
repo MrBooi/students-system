@@ -9,17 +9,35 @@ let app = new Vue ({
        showDashboard :true,
         studentList :[],
        student: {
-    	   name:'Aya',
+    	   name:'',
     	   surname:'',
     	   age:'',
     	   email:'',
-    	   score :'50'
+    	   score : '',
        }, 
        prevScore:0,
        msg :'',
-       isError : false
+       success : null
        
    },
+   
+   computed :{ 
+	  
+	   alertMessage : function(){
+	        let self = this;
+	          if(self.success){
+	       	  return "alert alert-primary";
+	          } 
+	          else if(self.success === false){
+	        	  return "alert alert-danger";
+	          }
+	   	}
+	   
+    
+   },
+   
+   
+   
    components : {
 	   'student-list' : StudentList,
 	   'edit-student' : EditStudent
@@ -52,15 +70,15 @@ addStudent: function () {
  
   axios.post('/api/add/new/student',studentData)
   .then((results) => {
-  	console.log("data",results);
-      if (results.success) {         
-         self.msg = results.msg
+  	 const {success,message} = results.data;
+      if (success) {         
+         this.success =success;
+         this.msg=message;
          
       }
       else{
-      	  self.isError =true;
-      	  self.msg =results.msg
-        
+    	  this.success =success;
+          this.msg=message;
       }
   });
 },
@@ -72,10 +90,29 @@ capture_Score : function () {
 		  console.log(message,success);
 		  if(success){
 	      console.log(message);
+	      this.success =success;
+	         this.msg=message;
 		  } 
+		  else{
+			   this.success =success;
+		         this.msg=message;
+		  }
 		  
 	 })
-}
+},
+
+	clear : function(){
+        let self = this;
+        this.success ='';
+        this.msg='';
+        self.student= {
+				 name : '',
+				 surname:'',
+				 age    :'',
+				 email  :''
+		 }
+
+   	}
 
 
    

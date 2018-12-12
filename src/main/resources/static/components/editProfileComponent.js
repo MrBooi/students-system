@@ -7,10 +7,27 @@ var EditStudent = Vue.component('edit-student',{
        studentData:{ 
     	  name:'',
           surname:'',
-          age:0,
-          email :''}
-        
+          age:'',
+          email :''},
+          msg :"",
+          success: null,
+          score :'',
+          view : "GET Current Score "
         }
+        
+    }, 
+    computed :{
+    	alertMessage : function(){
+            let self = this;
+       		
+              if(self.success){
+           	  return "alert alert-primary";
+              } 
+              else if(self === false){
+            	  return "alert alert-danger";
+              }
+       		
+       	}
     },
    
     mounted : function() {
@@ -37,22 +54,59 @@ var EditStudent = Vue.component('edit-student',{
     		  	const {success,message} = results.data;
     		  	
     		      if (success) {         
-    		       console.log(message);
-    		      }
+    		    	  self.success = success;
+    		    	  self.msg = message;
+    		       
+    		      } else if(!success){
+    		    	  self.success = success;
+    		    	  self.msg = message;
+    		      } 
+    		    
     		  });
     	},
+    	
+    	 getScore : function(){
+    		   let self = this;
+    	        axios.get('/api/Student/lastest/Score/id/'+this.studentId)
+    	        .then((results) => {
+    	           const {data,success} = results.data;
+    	        	if(success){
+    	        	 self.score =data;
+    	        	 self.view = "Current score is "
+    	        	}
+    	        });
+    		 
+    	 },
+    	
+    	
     	
     	deleteProfile : function(){
     		let self = this; 
    		 axios.get('/api/remove/student/id/'+self.studentId)
    		  .then((results) => {
    		  	const {success,message} = results.data;
-   		  	
-   		      if (success) {         
-   		      self.studentData = [];
+   		      if (success) {  
+   		      this.clearProfile()
    		      }
+   		   self.success = success;
+	    	  self.msg = message;
    		  });
+    	},
+    	clearProfile : function (){
+    		let self = this;
+    		 self.studentData = {
+    				 name : '',
+    				 surname:'',
+    				 age    :'',
+    				 email  :''
+    		 }
     	}
+    	
+
+    	
+    	
+    	
+    	
     },
     template : `
     <div> 
@@ -62,10 +116,13 @@ var EditStudent = Vue.component('edit-student',{
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <h4>Edit Profile</h4>
+                  <h4>Edit Profile</h4> 
                 </div>
                 <div class="card-body">
                   <form>
+                  <div v-bind:class="[alertMessage]" role="alert">
+                     {{msg}}
+                  </div>
                     <div class="form-group">
                       <label for="name">Name</label>
                       <input type="text"   v-model="studentData.name" disabled  class="form-control" value="">
@@ -84,8 +141,20 @@ var EditStudent = Vue.component('edit-student',{
                     </div>
                   </form>
                   <div class="col-md-3 float-right ">
-                    <button class="btn btn-primary btn-block" v-on:click="editProfile()">Edit Student</button>
-                  </div>
+                    <button class="btn btn-primary btn-block" 
+                       v-if="studentData.name.length>0  &&
+                             studentData.surname.length>2  &&
+                              studentData.age >0 &&
+                            studentData.email.length>5 
+                     "
+                     v-on:click="editProfile()">Edit Student</button>
+                  </div> 
+                  
+                    <div class="col-md-3 float-right">
+                    <button class="btn btn-dark btn-block" v-on:click="getScore()">
+                   {{view}} <span class="badge badge-light">{{score}}</span></button>
+                  </div> 
+                 
                   <div class="col-md-3 ">
                     <button class="btn btn-danger btn-block float-right" v-on:click="deleteProfile()"   >Delete Account</button>
                   </div>

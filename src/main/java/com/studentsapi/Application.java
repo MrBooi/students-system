@@ -21,12 +21,8 @@ public class Application  {
 	StudentService studentService;
 	StudentScoreService studentScoreService;
 	public static void main(String[] args) {
-		ApplicationContext context =  SpringApplication.run(Application.class, args);
-//    StudentService studentService = context.getBean(StudentService.class); 
-//    StudentScoreService studentScoreService = context.getBean(StudentScoreService.class);
-      
-//    studentService.loadAllStudents();
-	 
+	 SpringApplication.run(Application.class, args);
+
 	} 
 	
 	

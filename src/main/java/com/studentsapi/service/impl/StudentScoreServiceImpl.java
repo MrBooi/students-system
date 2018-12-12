@@ -14,9 +14,10 @@ public class StudentScoreServiceImpl implements StudentScoreService{
 	@Autowired StudentScoreDao studentScoreDao ;
 	
 	@Override
-	public void insertScore(int id, int studentScore) {
+	public void insertScore(int id, int studentScore)  {
 		studentScoreDao.insertScore(id,studentScore);
 	}
+	
 
 	@Override
 	public void insertScore(Score score) {

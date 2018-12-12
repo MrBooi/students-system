@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 import com.studentsapi.dao.StudentDao;
 import com.studentsapi.model.Student;
 import com.studentsapi.service.StudentService;
-@Service
+@Service 
+
 public class StudentServiceImpl implements StudentService{
      
 	@Autowired StudentDao StudentDao;
@@ -20,17 +21,16 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	@Override
+	
 	public void insertBatch(List<Student> students) {
-		StudentDao.insertBatch(students);
+	   	StudentDao.insertBatch(students);
 		
 	}
 
 	@Override
 	public Object loadAllStudents() {
 		List<Student> listStudents = StudentDao.loadAllStudents();
-		for(Student stud: listStudents){
-			System.out.println(stud);
-		}
+	
 		return  listStudents;
 	}
 
